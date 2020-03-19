@@ -1,0 +1,50 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: scheduler
+  data:
+    mongodb:
+      port: 27018
+      database: adventures
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
+    appname: ${spring.application.name}
+    health-check-url-path: ${management.endpoints.web.base-path}/${management.endpoints.web.path-mapping.health}
+
+window:
+  delay: 10
+  size: 100
+
+scheduler:
+  delay: 300000
+
+services:
+  core:
+    instance:
+      name: core
+  auth:
+    instance:
+      name: auth_server
+
+service.user:
+  username: service_user
+  password: 12345
+
+jwt:
+  secret: 221289467373239132392100524793330277079015100601027756758362863427452681212714126838199300647898430584144500806059458278321518777044762899512296866600872394644380219013320495156971514431190023600729602211122577883306928327035481763181383360484196857466673122026840292263234856687762092039930273840883706411057986999291723263528956058054902470342623926525220419403492184749748080083440782860930153041629788053392850350190345701856884676367792841834106393147716901597512639433053628947682648446566660847625123370647049602729290059736582541200917525808306486312868092094709254446973240693245640735124383753810943940731642145971
+
+management:
+  endpoints:
+    web:
+      base-path: /public
+      path-mapping:
+        health: health-check
+  endpoint:
+    health:
+      show-details: always
